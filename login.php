@@ -14,9 +14,14 @@ if ($count == 1) {
     $fullName = $row['fullName']; // Assuming fullName is a column in the 'user' table
     $phoneNumber = $row['phoneNumber']; // Assuming phoneNumber is a column in the 'user' table
     $emailAddress = $row['emailAddress']; // Assuming emailAddress is a column in the 'user' table
+    $image = base64_encode($row['image']); // Assuming 'image' is a column storing image as longblob
 
-    // Assuming 'image' is the column in the 'user' table that stores the image as longblob
-    $image = base64_encode($row['image']); // Encode the image data as base64
+    // Fetch the role information from the 'role' table based on the 'role_id'
+    $role_id = $row['role_id'];
+    $role_sql = "SELECT * FROM role WHERE role_id = '" . $role_id . "'";
+    $role_result = mysqli_query($db, $role_sql);
+    $role_row = mysqli_fetch_assoc($role_result);
+    $rolename = $role_row['rolename']; // Assuming 'rolename' is a column in the 'role' table
 
     // Create a JSON response array
     $response = array(
@@ -26,7 +31,8 @@ if ($count == 1) {
         "fullName" => $fullName,
         "phoneNumber" => $phoneNumber,
         "emailAddress" => $emailAddress,
-        "image" => $image
+        "image" => $image,
+        "rolename" => $rolename
     );
 
     // Encode the array as JSON and echo it
