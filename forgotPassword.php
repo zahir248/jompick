@@ -15,18 +15,17 @@ if ($conn->connect_error) {
 
 // Receive updated password data from the request
 $username = $_POST['username']; // Assuming you are using the username for authentication
-$emailAddress = $_POST['emailAddress'];
 $newPassword = $_POST['newPassword'];
 
 // Check if the submitted username and email match an existing user
-$sqlCheck = "SELECT * FROM user WHERE username = '$username' AND emailAddress = '$emailAddress'";
+$sqlCheck = "SELECT * FROM user WHERE username = '$username';";
 $resultCheck = $conn->query($sqlCheck);
 
 $response = array(); // Create an associative array for the response
 
 if ($resultCheck->num_rows > 0) {
     // User found, update the user's password in the database
-    $sqlUpdate = "UPDATE user SET password = '$newPassword' WHERE username = '$username' AND emailAddress = '$emailAddress'";
+    $sqlUpdate = "UPDATE user SET password = '$newPassword' WHERE username = '$username';";
 
     if ($conn->query($sqlUpdate) === TRUE) {
         $response['success'] = true;
