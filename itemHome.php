@@ -18,8 +18,9 @@ $userID = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 
 if ($userID !== null) {
     // Fetch user data based on the user ID
-    $sql = "SELECT item_management.item_id, item.name, item.location, item_management.registerDate, item.trackingNumber, item_type.name AS itemType, item.image, confirmation.status, confirmation.confirmationDate, pickup_location.address 
+    $sql = "SELECT item_management.item_id, item.name, item.location, item_management.registerDate, item.trackingNumber, item_type.name AS itemType, item.image, confirmation.status, confirmation.confirmationDate, pickup_location.address, user.fullName, confirmation.pickupType, confirmation.confirmation_id
     FROM item_management
+    INNER JOIN user ON item_management.user_id = user.user_id
     INNER JOIN item ON item_management.item_id = item.item_id
     INNER JOIN item_type ON item.itemType_id = item_type.itemType_id
     INNER JOIN confirmation ON item_management.confirmation_id = confirmation.confirmation_id

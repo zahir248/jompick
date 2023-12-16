@@ -16,11 +16,13 @@ if ($conn->connect_error) {
 $itemId = $_POST['itemId'];
 $pickUpDuration = $_POST['pickUpDuration'];
 $currentLocation = $_POST['currentLocation'];
+$pickupType = $_POST['pickupType']; // Add this line to get pickupType
 
 // Perform the update query
 $updateQuery = "UPDATE confirmation 
                 SET pickUpDuration = '$pickUpDuration', 
-                    currentLocation = '$currentLocation'
+                    currentLocation = '$currentLocation',
+                    pickupType = '$pickupType'
                 WHERE confirmation_id = (
                     SELECT im.confirmation_id
                     FROM item_management im
