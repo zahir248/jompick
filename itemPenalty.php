@@ -20,7 +20,7 @@ if ($userID !== null) {
     // Fetch user data based on the user ID
     $sql = "SELECT item_management.item_id, item.name, item.location, item_management.registerDate, 
                     item.trackingNumber, item_type.name AS itemType, item.image, confirmation.status, 
-                    confirmation.confirmationDate, payment_status.status AS penaltyStatus
+                    confirmation.confirmationDate, payment_status.status AS penaltyStatus, confirmation.imageProof
             FROM item_management
             INNER JOIN item ON item_management.item_id = item.item_id
             INNER JOIN item_type ON item.itemType_id = item_type.itemType_id
@@ -38,6 +38,7 @@ if ($userID !== null) {
             $rows = array();
             while ($row = $result->fetch_assoc()) {
                 $row['image'] = base64_encode($row['image']);
+                $row['imageProof'] = base64_encode($row['imageProof']);
                 $rows[] = $row;
             }
 

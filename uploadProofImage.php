@@ -17,15 +17,15 @@ if ($conn->connect_error) {
 $confirmationId = $_POST['confirmationId'];
 
 // Check if an image is sent
-if(isset($_FILES['image'])) {
-    $image = file_get_contents($_FILES['image']['tmp_name']); // Read the image content as binary data
+if(isset($_FILES['imageProof'])) {
+    $imageProof = file_get_contents($_FILES['imageProof']['tmp_name']); // Read the image content as binary data
 
     // Insert the image into the confirmation table in the database
-    $sql = "UPDATE confirmation SET image = ? WHERE confirmation_id = ?";
+    $sql = "UPDATE confirmation SET imageProof = ? WHERE confirmation_id = ?";
     $stmt = $conn->prepare($sql);
 
     // Bind parameters
-    $stmt->bind_param("si", $image, $confirmationId);
+    $stmt->bind_param("si", $imageProof, $confirmationId);
 
     // Execute the statement
     if ($stmt->execute()) {

@@ -18,7 +18,7 @@ $userID = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 
 if ($userID !== null) {
     // Fetch user data based on the user ID
-    $sql = "SELECT item_management.item_id, item.name, item.location, item_management.registerDate, item.trackingNumber, item_type.name AS itemType, item.image, confirmation.status, confirmation.confirmationDate
+    $sql = "SELECT item_management.item_id, item.name, item.location, item_management.registerDate, item.trackingNumber, item_type.name AS itemType, item.image, confirmation.status, confirmation.confirmationDate, confirmation.imageProof
     FROM item_management
     INNER JOIN item ON item_management.item_id = item.item_id
     INNER JOIN item_type ON item.itemType_id = item_type.itemType_id
@@ -33,6 +33,7 @@ if ($userID !== null) {
             $rows = array();
             while ($row = $result->fetch_assoc()) {
                 $row['image'] = base64_encode($row['image']);
+                $row['imageProof'] = base64_encode($row['imageProof']);
                 $rows[] = $row;
             }
 
@@ -55,3 +56,4 @@ if ($userID !== null) {
 // Close the database connection
 $conn->close();
 ?>
+
