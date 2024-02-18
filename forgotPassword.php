@@ -24,8 +24,10 @@ $resultCheck = $conn->query($sqlCheck);
 $response = array(); // Create an associative array for the response
 
 if ($resultCheck->num_rows > 0) {
+
+    $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
     // User found, update the user's password in the database
-    $sqlUpdate = "UPDATE user SET password = '$newPassword' WHERE username = '$username';";
+    $sqlUpdate = "UPDATE user SET password = '$hashedNewPassword' WHERE username = '$username';";
 
     if ($conn->query($sqlUpdate) === TRUE) {
         $response['success'] = true;

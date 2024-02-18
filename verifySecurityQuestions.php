@@ -4,11 +4,12 @@ if (!$db) {
     echo "Database connection failed";
 }
 
+$emailAddress = $_POST['emailAddress'];
 $answer1 = $_POST['answer1'];
 $answer2 = $_POST['answer2'];
 
 // Assuming your database table structure has columns 'securityQuestion1' and 'securityQuestion2'
-$sql = "SELECT username FROM user WHERE securityQuestion1 = '$answer1' AND securityQuestion2 = '$answer2'";
+$sql = "SELECT username FROM user WHERE emailAddress = '$emailAddress' AND securityQuestion1 = '$answer1' AND securityQuestion2 = '$answer2'";
 $result = mysqli_query($db, $sql);
 
 if ($result) {

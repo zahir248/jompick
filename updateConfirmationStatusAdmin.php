@@ -30,12 +30,12 @@ if ($result) {
 
     if ($row['status'] == 'Picked') {
         echo "You have already picked up your item";
-    } elseif ($row['status'] == 'Pending') {
+    } elseif ($row['status'] == 'Pending' || 'Pick Now' ) {
         // Perform the update query
         $updateQuery = "UPDATE confirmation c
                         JOIN item_management im ON c.confirmation_id = im.confirmation_id
                         JOIN confirmation_status cs ON c.confirmationStatus_id = cs.confirmationStatus_id
-                        SET c.confirmationStatus_id = '2'
+                        SET c.confirmationStatus_id = '2', c.pickUpDate = NOW()
                         WHERE im.item_id = $itemId";
 
         if (mysqli_query($conn, $updateQuery)) {

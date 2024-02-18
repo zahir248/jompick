@@ -14,17 +14,11 @@ if ($conn->connect_error) {
 
 // Get the POST data from the Flutter app
 $itemId = $_POST['itemId'];
-$pickUpDuration = $_POST['pickUpDuration'];
-$currentLocation = $_POST['currentLocation'];
 $confirmationStatus_id =$_POST['confirmationStatus_id'];
-$pickupType = $_POST['pickupType'];
 
 // Perform the update query
 $updateQuery = "UPDATE confirmation 
-                SET pickUpDuration = '$pickUpDuration', 
-                    currentLocation = '$currentLocation',
-                    pickupType = '$pickupType',
-                    confirmationStatus_id = '1'
+                SET confirmationStatus_id = '3'
                 WHERE confirmation_id = (
                     SELECT im.confirmation_id
                     FROM item_management im

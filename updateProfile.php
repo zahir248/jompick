@@ -20,7 +20,7 @@ $phoneNumber = $_POST['phoneNumber'];
 $icNumber = $_POST['icNumber'];
 $emailAddress = $_POST['emailAddress'];
 
-// Check if an image is sent
+// Check if an image is sent    
 if(isset($_FILES['profile_image'])) {
     $image = file_get_contents($_FILES['profile_image']['tmp_name']); // Read the image content as binary data
 
